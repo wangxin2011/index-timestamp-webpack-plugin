@@ -19,13 +19,13 @@ class ScriptTimestampWebpackPlugin {
                 if(typeof _files == 'string'){
                    // 字符串
                    console.log("******jsScr********", htmlPluginData.assets.js);
-                   resultHTML = htmlPluginData.html.replace(
+                   resultHTML = resultHTML.replace(
                     _files, _files+'?v=' + new Date().getTime()
                    );
                 }else{
                   for(var i = 0; i < _files.length; i++){
                     var _file = _files[i];
-                    resultHTML = htmlPluginData.html.replace(
+                    resultHTML = resultHTML.replace(
                       _file, _file+'?v=' + new Date().getTime()
                      );
                   }
