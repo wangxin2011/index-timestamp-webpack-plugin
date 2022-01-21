@@ -6,20 +6,31 @@ class ScriptTimestampWebpackPlugin {
   apply(compiler) {
     compiler.hooks.compilation.tap('SetScriptTimestampPlugin',
       (compilation, callback) => {
-        let _options = this.options;
+        var _options = this.options;
         compilation.plugin(
           "html-webpack-plugin-before-html-processing",
           function (htmlPluginData, callback) {
             // let jsScr = htmlPluginData.assets.js[0];
             // htmlPluginData.assets.js = [];
-            console.log(_options)
             if(_options){
-              let _targe = _options.str;
-              if(_targe){
-                console.log("******jsScr********", htmlPluginData.assets.js);
-                let resultHTML = htmlPluginData.html.replace(
-                  _targe, _targe+'?v=' + new Date().getTime()
-                );
+              var _files = _options.files;
+              if(_files){
+                var resultHTML = htmlPluginData.html;
+                if(typeof _files == 'string'){
+                   // 字符串
+                   console.log("******jsScr********", htmlPluginData.assets.js);
+                   resultHTML = htmlPluginData.html.replace(
+                    _files, _files+'?v=' + new Date().getTime()
+                   );
+                }else{
+                  for(var i = 0; i < _files.length; i++){
+                    var _file = _files[i];
+                    resultHTML = htmlPluginData.html.replace(
+                      _file, _file+'?v=' + new Date().getTime()
+                     );
+                  }
+                }
+               
                 // 返回修改后的结果
                 htmlPluginData.html = resultHTML;
               }

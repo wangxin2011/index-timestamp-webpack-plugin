@@ -48,7 +48,8 @@ module.exports = {
   // ... 省略其他配置
   plugins: [
     // ... 省略其他插件
-    new ScriptTimestampWebpackPlugin({str: '需要添加时间戳的文件'})  
+    new ScriptTimestampWebpackPlugin({files: '需要添加时间戳的文件'})  
+    // 或 new ScriptTimestampWebpackPlugin({files: ['文件1名称','文件2名称']})  
   ]
 }
 ```
